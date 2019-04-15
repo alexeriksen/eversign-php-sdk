@@ -58,6 +58,13 @@ class File {
      * @Type("string")
      */
     private $fileBase64;
+    
+    /**
+    * Specifiy a template hash of a template you'd like to upload
+    * @var string $templateHash
+    * @Type("string")
+    */
+    private $templateHash;
 
     /**
      * The name of the File
@@ -137,6 +144,10 @@ class File {
     public function setFileBase64($fileBase64) {
         $this->clearFileFields();
         $this->fileBase64 = $fileBase64;
+    }
+    
+    public function setTemplateHash($templateHash){
+        $this->templateHash = $templateHash;
     }
 
     public function setFilePath($filePath) {
