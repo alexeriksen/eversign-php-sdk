@@ -23,11 +23,11 @@ $document->setExpires($date);
 //Create a Signer for the Document. Role needs to match eversign template for fields to pull through. 
 $signer = new Signer();
 $signer->setRole('Applicant');
-$signer->setName($name);
-$signer->setEmail($email);
+$signer->setName('John Doe');
+$signer->setEmail('johndoe@eversign.com');
 $document->appendSigner($signer);
 
-//Add a Template to the Document. Template ID is the document hash of the template. 
+//Add a Template to the Document. YOUR_TEMPLATE_ID_X is the document hash of the template being added. 
 $file = new File();
 $file->setName('Template 1');
 $file->setTemplateHash('YOUR_TEMPLATE_ID_1');
