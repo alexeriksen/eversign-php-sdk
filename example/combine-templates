@@ -1,0 +1,42 @@
+<?php
+require_once '../vendor/autoload.php';
+
+$config = require('./config.php');
+
+use Eversign\Client;
+use Eversign\Document;
+use Eversign\Field;
+use Eversign\Signer;
+use Eversign\Recipient;
+use Eversign\File;
+
+$client = new Client($config['accessKey'], $config['businessId']);
+
+$document = new Document();
+// $document->setSandbox(true);
+$document->setTitle('Test Title');
+
+$date = new DateTime();
+$date->add(new DateInterval('P30D'));
+$document->setExpires($date);
+
+//Create a Signer for the Document. Role needs to match eversign template for fields to pull through. 
+$signer = new Signer();
+$signer->setRole('Applicant');
+$signer->setName($name);
+$signer->setEmail($email);
+$document->appendSigner($signer);
+
+//Add a Template to the Document. Template ID is the document hash of the template. 
+$file = new File();
+$file->setName('Template 1');
+$file->setTemplateHash('YOUR_TEMPLATE_ID_1');
+$document->appendFile($file);
+
+$file = new File();
+$file->setName('Template 2');
+$file->setTemplateHash('YOUR_TEMPLATE_ID_2');
+$document->appendFile($file);
+
+//Creating a new Document
+$newlyCreatedDocument = $client->createDocument($document);
